@@ -1,6 +1,6 @@
 #!/bin/sh
 
-URL="http://52.17.174.169/api/competency"
+URL="http://localhost:5555/api/competency"
 ContentType="Content-Type: application/json"
 
 echo "Competencies Groups: "$URL

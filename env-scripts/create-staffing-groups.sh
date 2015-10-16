@@ -1,6 +1,6 @@
 #!/bin/sh
 
-URL="http://52.17.174.169/api/staffing-group"
+URL="http://localhost:5555/api/staffing-group"
 
 echo "Creating Staffing Groups: "$URL
 #Create Staffing Groups:
