@@ -1,24 +1,24 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-URL="http://localhost:5555/api/staffing-group"
-
-echo "Creating Staffing Groups: "$URL
 #Create Staffing Groups:
-#Managers, PM / SM / Service Owner, Web Designers, Technical Analysts, Quality Assurance, Mobile, .Net, Developers
+#WIP
+#$1: How many Staffing Groups?
+#$2: URL > ex: http://52.17.174.169:5000
 
-curl -X POST -H "Content-Type: application/json" -d '{"name": "Managers","description": "..."}' $URL
-echo ""
-curl -X POST -H "Content-Type: application/json" -d '{"name": "PM / SM / Service Owner","description": "..."}' $URL
-echo ""
-curl -X POST -H "Content-Type: application/json" -d '{"name": "Web Designers","description": "..."}' $URL
-echo ""
-curl -X POST -H "Content-Type: application/json" -d '{"name": "Technical Analysts","description": "..."}' $URL
-echo ""
-curl -X POST -H "Content-Type: application/json" -d '{"name": "Quality Assurance","description": "..."}' $URL
-echo ""
-curl -X POST -H "Content-Type: application/json" -d '{"name": "Mobile","description": "..."}' $URL
-echo ""
-curl -X POST -H "Content-Type: application/json" -d '{"name": ".Net","description": "..."}' $URL
-echo ""
-curl -X POST -H "Content-Type: application/json" -d '{"name": "Developers","description": "..."}' $URL
-echo ""
+set -e
+
+cd $(dirname ${BASH_SOURCE[0]})
+
+URL="$2/api/staffing-group"
+echo "Creating Staffing Groups at "$2
+
+JSON1='{"name": "staffingGroup'
+JSON2='","description": "..."}'
+
+START=1
+END=$1
+for ((i=START; i<=END; i++))
+do
+    STAFFING_ID[i]=$(curl -X POST -H "Content-Type: application/json" -d $JSON1$i$JSON2 $URL | jq .id)
+    export ${STAFFING_ID[i]}
+done

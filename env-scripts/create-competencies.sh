@@ -1,21 +1,23 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-URL="http://localhost:5555/api/competency"
-ContentType="Content-Type: application/json"
-
-echo "Competencies Groups: "$URL
 #Create Competencies:
-#....
+#WIP
+#$1: How many?
+#$2: URL > ex: http://52.17.174.169:5000
 
-curl -X POST -H "Content-Type: application/json" -d '{"name": "Competency 1","description": "..."}' $URL
-echo ""
-curl -X POST -H "Content-Type: application/json" -d '{"name": "Competency 2","description": "..."}' $URL
-echo ""
-curl -X POST -H "Content-Type: application/json" -d '{"name": "Competency 3","description": "..."}' $URL
-echo ""
-curl -X POST -H "Content-Type: application/json" -d '{"name": "Competency 4","description": "..."}' $URL
-echo ""
-curl -X POST -H "Content-Type: application/json" -d '{"name": "Competency 5","description": "..."}' $URL
-echo ""
-curl -X POST -H "Content-Type: application/json" -d '{"name": "Competency 6","description": "..."}' $URL
-echo ""
+set -e
+
+cd $(dirname ${BASH_SOURCE[0]})
+
+URL="$2/api/competency"
+echo "Creating Competencies at "$2
+
+JSON1='{"name": "Competency'
+JSON2='","description": "..."}'
+
+START=1
+END=$1
+for ((i=START; i<=END; i++))
+do
+    curl -X POST -H "Content-Type: application/json" -d $JSON1$i$JSON2 $URL | jq .
+done

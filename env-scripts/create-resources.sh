@@ -1,12 +1,13 @@
 #!/bin/sh
 
 #WIP
-#You need to change the URL and the staffingGroup id
-URL="http://localhost:5555/api/resource"
+#$1: How many resources?
+#$2: STAFFING_ID
+#$3: URL
 
-echo "Creating resources in: "$URL
+echo "Creating Resources at "$3
 
-curl -X POST -H "Content-Type: application/json" -d '{
+JSON1='{
   "resource": {
     "name": "tester man"
   },
@@ -19,8 +20,17 @@ curl -X POST -H "Content-Type: application/json" -d '{
     }
   ],
   "staffingGroup": {
-    "id": "07c2fb22-14bf-4918-a70c-2aa4498c9de0",
-    "description": "Description"
-  }
-}' $URL
+    "id": '
+JSON2=',
+"description": "Description"
+}
+}'
+
+START=1
+END=$1
+for ((i=START; i<=END; i++))
+do
+   curl -X POST -H "Content-Type: application/json" -d $JSON1$2$JSON2 $3 | jq .
+done
+
 echo ""
