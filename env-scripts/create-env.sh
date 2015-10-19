@@ -15,6 +15,8 @@ NUM_RESOURCES=5
 NUM_PROJECTS=5
 URL='http://52.17.174.169:5000'
 
-./create-staffing-groups.sh $NUM_STAFFING_GROUPS $URL | xargs -I {} ./create-resources.sh $NUM_RESOURCES {} $URL
+./create-staffing-groups.sh $NUM_STAFFING_GROUPS $URL |
+xargs -I {} ./create-resources.sh $NUM_RESOURCES {} $URL |
+xargs -I {} ./create-project.sh {} $URL
 
 ./create-competencies.sh $NUM_COMPETENCIES $URL

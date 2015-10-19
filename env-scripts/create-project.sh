@@ -10,7 +10,6 @@ set -e
 cd $(dirname ${BASH_SOURCE[0]})
 
 URL="$2/api/project"
-echo "Creating Project at "$URL
 
 JSON1='{"project": {"name": "Project'
 JSON2='","wbs": "WBS'
@@ -21,6 +20,6 @@ JSON4='",
 }
 }'
 
-curl -X POST -H "Content-Type: application/json" -d "$JSON1$(date +"%N")$JSON2$(date +"%N")$JSON3$1$JSON4" $URL | jq .
+curl --silent -X POST -H "Content-Type: application/json" -d "$JSON1$(date +"%N")$JSON2$(date +"%N")$JSON3$1$JSON4" $URL | jq .
 
 echo ""
