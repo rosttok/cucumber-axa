@@ -19,5 +19,4 @@ END=$1
 for ((i=START; i<=END; i++))
 do
     curl --silent -X POST -H "Content-Type: application/json" -d "$JSON1$(date +"%N")$JSON2" $URL | jq .id
-    #print $STAFFING_ID[i]
 done

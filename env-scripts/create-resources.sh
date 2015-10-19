@@ -1,15 +1,24 @@
-#!/bin/sh
+#!/usr/bin/env bash
+
+set -e
+
+cd $(dirname ${BASH_SOURCE[0]})
 
 #WIP
 #$1: How many resources?
 #$2: STAFFING_ID
 #$3: URL
 
-echo "Creating Resources at "$3
+# echo "$1"
+# echo "$2"
+# echo "Creating Resources at $3"
+URL="$3/api/resource"
 
 JSON1='{
   "resource": {
-    "name": "tester man"
+    "name": "resource'
+
+JSON2='"
   },
   "contracts": [
     {
@@ -20,8 +29,8 @@ JSON1='{
     }
   ],
   "staffingGroup": {
-    "id": '
-JSON2=',
+    "id": "'
+JSON3='",
 "description": "Description"
 }
 }'
@@ -30,7 +39,5 @@ START=1
 END=$1
 for ((i=START; i<=END; i++))
 do
-   curl -X POST -H "Content-Type: application/json" -d $JSON1$2$JSON2 $3 | jq .
+  curl --silent -X POST -H "Content-Type: application/json" -d "$JSON1$(date +"%N")$JSON2$2$JSON3" $URL | jq .resource.id
 done
-
-echo ""

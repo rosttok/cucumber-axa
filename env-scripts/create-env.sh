@@ -17,4 +17,4 @@ URL='http://52.17.174.169:5000'
 
 . ./create-competencies.sh $NUM_COMPETENCIES $URL
 
-. ./create-staffing-groups.sh $NUM_STAFFING_GROUPS $URL
+. ./create-staffing-groups.sh 10 http://52.17.174.169:5000 | xargs -0 -I {} ./create-resources.sh 10 "c2146205-6907-4747-8725-f7dacd729e8c" http://52.17.174.169:5000
