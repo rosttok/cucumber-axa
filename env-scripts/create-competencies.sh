@@ -10,7 +10,7 @@ set -e
 cd $(dirname ${BASH_SOURCE[0]})
 
 URL="$2/api/competency"
-echo "Creating Competencies at "$2
+#echo "Creating Competencies at "$2
 
 JSON1='{"name": "Competency'
 JSON2='","description": "..."}'
@@ -19,5 +19,5 @@ START=1
 END=$1
 for ((i=START; i<=END; i++))
 do
-    curl -X POST -H "Content-Type: application/json" -d $JSON1$i$JSON2 $URL | jq .
+    curl --silent -X POST -H "Content-Type: application/json" -d "$JSON1$(date +"%N")$JSON2" $URL | jq .id
 done

@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 #Create Staffing Groups:
 #WIP
 #$1: How many Staffing Groups?
@@ -10,7 +9,7 @@ set -e
 cd $(dirname ${BASH_SOURCE[0]})
 
 URL="$2/api/staffing-group"
-echo "Creating Staffing Groups at "$2
+#echo "Creating Staffing Groups at "$2
 
 JSON1='{"name": "staffingGroup'
 JSON2='","description": "..."}'
@@ -19,6 +18,6 @@ START=1
 END=$1
 for ((i=START; i<=END; i++))
 do
-    STAFFING_ID[i]=$(curl -X POST -H "Content-Type: application/json" -d $JSON1$i$JSON2 $URL | jq .id)
-    export ${STAFFING_ID[i]}
+    curl --silent -X POST -H "Content-Type: application/json" -d "$JSON1$(date +"%N")$JSON2" $URL | jq .id
+    #print $STAFFING_ID[i]
 done
